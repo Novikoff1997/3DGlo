@@ -28,13 +28,12 @@ const timer = (deadline) => {
     timerSeconds.textContent = setZero(getTime.seconds);
   };
 
-  const startTimer = () => {
-    let timeRemaning = getTimeRemaning().timeRemaning;
+  const startTimer = (timeRemaning) => {
     if (timeRemaning > 0) {
       setInterval(updateClock, 1000);
     }
   };
-  startTimer();
+  startTimer(getTimeRemaning().timeRemaning);
 };
 
 export default timer;
