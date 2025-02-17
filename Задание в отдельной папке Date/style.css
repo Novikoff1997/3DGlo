@@ -1,0 +1,11 @@
+.date-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 1700px;
+  background-color: rgb(209, 209, 209);
+  margin: auto;
+  font-size: 40px;
+  font-family: sans-serif;
+}
