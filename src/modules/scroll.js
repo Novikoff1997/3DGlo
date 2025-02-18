@@ -24,7 +24,7 @@ const scroll = () => {
 
   scrollBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    smoothScroll(830);
+    smoothScroll(857);
   });
 
   menuButtons.forEach((menuButton, index) => {
