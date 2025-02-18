@@ -5,8 +5,6 @@ const modal = () => {
   const closeBtn = modal.querySelector(".popup-close");
   const windowWidth = document.documentElement.clientWidth;
 
-  console.log(windowWidth);
-
   let count = -50;
   let idInterval;
 
