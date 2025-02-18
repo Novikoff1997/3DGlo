@@ -33,6 +33,8 @@ const timer = (deadline) => {
       setInterval(updateClock, 1000);
     }
   };
+
+  updateClock();
   startTimer(getTimeRemaning().timeRemaning);
 };
 
