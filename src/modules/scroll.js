@@ -2,29 +2,15 @@ const scroll = () => {
   const scrollBtn = document.querySelector("main>a");
   const menuButtons = document.querySelectorAll("menu>ul>li>a");
 
-  let scrollNow = 0;
-  let idInterval;
-
-  document.addEventListener("scroll", () => {
-    scrollNow = document.documentElement.scrollTop;
-  });
-
-  const smoothScroll = (goTo) => {
-    let diff = scrollNow - goTo;
-    let step = Math.abs(Math.floor(diff * 0.1));
-    idInterval = requestAnimationFrame(() => smoothScroll(goTo));
-
-    if (scrollNow < goTo) {
-      scrollNow = scrollNow + step;
-      window.scrollTo(0, scrollNow);
-    } else {
-      cancelAnimationFrame(idInterval);
-    }
+  const scroll = (button) => {
+    let href;
+    href = button.href.replace(/.*\//, "");
+    document.querySelector(href).scrollIntoView({ behavior: "smooth" });
   };
 
   scrollBtn.addEventListener("click", (event) => {
     event.preventDefault();
-    smoothScroll(857);
+    scroll(scrollBtn);
   });
 
   menuButtons.forEach((menuButton, index) => {
@@ -32,19 +18,19 @@ const scroll = () => {
       event.preventDefault();
       switch (index) {
         case 0:
-          smoothScroll(857);
+          scroll(menuButton);
           break;
         case 1:
-          smoothScroll(2077);
+          scroll(menuButton);
           break;
         case 2:
-          smoothScroll(3060);
+          scroll(menuButton);
           break;
         case 3:
-          smoothScroll(4212);
+          scroll(menuButton);
           break;
         case 4:
-          smoothScroll(5046);
+          scroll(menuButton);
           break;
       }
     });
