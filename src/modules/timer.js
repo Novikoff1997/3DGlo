@@ -31,6 +31,11 @@ const timer = (deadline) => {
   const startTimer = (timeRemaning) => {
     if (timeRemaning > 0) {
       setInterval(updateClock, 1000);
+    } else {
+      timerDays.textContent = "00";
+      timerHours.textContent = "00";
+      timerMinutes.textContent = "00";
+      timerSeconds.textContent = "00";
     }
   };
 
