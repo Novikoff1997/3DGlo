@@ -15,12 +15,10 @@ const validate = () => {
     const formInputs = form.querySelectorAll("input");
 
     const invalid = (elem) => {
-      elem.classList.add("form-control");
-      elem.classList.add("is-invalid");
+      elem.style.border = "2px solid red";
     };
     const valid = (elem) => {
-      elem.classList.remove("form-control");
-      elem.classList.remove("is-invalid");
+      elem.style.border = "2px solid green";
     };
 
     form.addEventListener("submit", (e) => {
@@ -28,9 +26,11 @@ const validate = () => {
       let isError = false;
 
       formInputs.forEach((elem) => {
+        elem.classList.add("form-control");
+
         switch (elem.type) {
           case "text":
-            if (/[^а-яА-Я\s\-]/g.test(elem.value)) {
+            if (/[^а-яА-Я\s\-]/g.test(elem.value) || elem.value === "") {
               invalid(elem);
               isError = true;
             } else {
@@ -38,7 +38,7 @@ const validate = () => {
             }
             break;
           case "email":
-            if (/[^\w@\-_.!~*']/g.test(elem.value)) {
+            if (/[^\w@\-_.!~*']/g.test(elem.value) || elem.value === "") {
               invalid(elem);
               isError = true;
             } else {
@@ -46,7 +46,7 @@ const validate = () => {
             }
             break;
           case "tel":
-            if (/[^1-9\(\)\-\+\ ]/g.test(elem.value)) {
+            if (/[^1-9\(\)\-\+\ ]/g.test(elem.value) || elem.value === "") {
               invalid(elem);
               isError = true;
             } else {
@@ -57,6 +57,9 @@ const validate = () => {
       });
       if (!isError) {
         alert("Данные отправлены!");
+        formInputs.forEach((elem) => {
+          elem.removeAttribute("style");
+        });
       } else {
         alert("Проверьте правильность введенных данных");
       }
