@@ -10,7 +10,7 @@ const validate = () => {
     });
   };
 
-  const validator = (formId) => {
+  const formValidator = (formId) => {
     const form = document.getElementById(formId);
     const formInputs = form.querySelectorAll("input");
 
@@ -69,8 +69,8 @@ const validate = () => {
   };
 
   calc();
-  validator("form1");
-  validator("form2");
+  formValidator("form1");
+  formValidator("form2");
 };
 
 export default validate;
