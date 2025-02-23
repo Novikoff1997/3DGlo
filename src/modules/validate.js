@@ -10,55 +10,57 @@ const validate = () => {
     });
   };
 
-  const formValidte = (formId) => {
+  const validator = (formId) => {
     const form = document.getElementById(formId);
     const formInputs = form.querySelectorAll("input");
 
-    const invalid = (elem) => {
-      elem.style.border = "2px solid red";
-    };
-    const valid = (elem) => {
-      elem.style.border = "2px solid green";
-    };
+    let isError = false;
 
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
-      let isError = false;
-
-      formInputs.forEach((elem) => {
-        elem.classList.add("form-control");
-
+    formInputs.forEach((elem) => {
+      elem.addEventListener("blur", () => {
+        elem.value = elem.value.replace(/^\-+/g, "");
+        elem.value = elem.value.replace(/\-+$/g, "");
+        elem.value = elem.value.replace(/[ ]+/g, " ");
+        elem.value = elem.value.replace(/^[ ]+/g, "");
+        elem.value = elem.value.replace(/[ ]+$/g, "");
+        elem.value = elem.value.replace(/[\-]+/g, "-");
         switch (elem.type) {
           case "text":
-            if (/[^а-яА-Я\s\-]/g.test(elem.value) || elem.value === "") {
-              invalid(elem);
-              isError = true;
+            elem.value = elem.value.replace(/[^а-яА-Я \-]/g, "");
+            elem.value = elem.value.replace(/[а-яА-Я]+/g, (str) => {
+              return str.slice(0, 1).toLocaleUpperCase() + str.slice(1).toLocaleLowerCase();
+            });
+            if (/[а-яА-Я\- ]/g.test(elem.value) || !elem.value === "") {
+              isError = false;
             } else {
-              valid(elem);
+              isError = true;
             }
             break;
           case "email":
-            if (/[^\w@\-_.!~*']/g.test(elem.value) || elem.value === "") {
-              invalid(elem);
-              isError = true;
+            elem.value = elem.value.replace(/[^\w@\-_.!~*']/g, "");
+            if (/[\w@\-_.!~*']/g.test(elem.value) || !elem.value === "") {
+              isError = false;
             } else {
-              valid(elem);
+              isError = true;
             }
             break;
           case "tel":
-            if (/[^1-9\(\)\-\+\ ]/g.test(elem.value) || elem.value === "") {
-              invalid(elem);
-              isError = true;
+            elem.value = elem.value.replace(/[^1-9\(\)\-\+ ]/g, "");
+            if (/[1-9\(\)\-\+\ ]/g.test(elem.value) || !elem.value === "") {
+              isError = false;
             } else {
-              valid(elem);
+              isError = true;
             }
             break;
         }
       });
+    });
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
       if (!isError) {
         alert("Данные отправлены!");
         formInputs.forEach((elem) => {
-          elem.removeAttribute("style");
+          elem.value = "";
         });
       } else {
         alert("Проверьте правильность введенных данных");
@@ -67,8 +69,8 @@ const validate = () => {
   };
 
   calc();
-  formValidte("form1");
-  formValidte("form2");
+  validator("form1");
+  validator("form2");
 };
 
 export default validate;
