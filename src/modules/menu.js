@@ -4,9 +4,7 @@ const menu = () => {
   const menuCloseBtn = menu.querySelector(".close-btn");
   const menuItems = menu.querySelectorAll("ul>li>a");
 
-  const handleMenu = () => {
-    menu.classList.toggle("active-menu");
-  };
+  menu.addEventListener("click");
 
   menuBtn.addEventListener("click", handleMenu);
 
