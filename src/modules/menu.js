@@ -11,10 +11,7 @@ const menu = () => {
         handleMenu();
       } else if (e.target.closest(".active-menu") && e.target.tagName === "A") {
         handleMenu();
-      } else if (
-        !e.target.classList.contains("active-menu") &&
-        menu.classList.contains("active-menu")
-      ) {
+      } else if (!e.target.closest(".active-menu") && menu.classList.contains("active-menu")) {
         handleMenu();
       }
     });

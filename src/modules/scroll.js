@@ -16,23 +16,7 @@ const scroll = () => {
   menuButtons.forEach((menuButton, index) => {
     menuButton.addEventListener("click", (event) => {
       event.preventDefault();
-      switch (index) {
-        case 0:
-          scroll(menuButton);
-          break;
-        case 1:
-          scroll(menuButton);
-          break;
-        case 2:
-          scroll(menuButton);
-          break;
-        case 3:
-          scroll(menuButton);
-          break;
-        case 4:
-          scroll(menuButton);
-          break;
-      }
+      scroll(menuButton);
     });
   });
 };
