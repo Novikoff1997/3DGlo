@@ -4,9 +4,7 @@ const scroll = () => {
 
   const scroll = (button) => {
     let href;
-    href = button.href.replace(/.*\//, "");
-    // console.log(href);
-    // console.log(document.querySelector(href));
+    href = button.getAttribute("href");
 
     document.querySelector(href).scrollIntoView({ behavior: "smooth" });
   };
