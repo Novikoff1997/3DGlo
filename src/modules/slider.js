@@ -12,9 +12,6 @@ const slider = (
   let currenSlide = 0;
   let interval;
 
-  console.log(sliderBlock);
-  console.log(slides.length);
-
   if (!sliderBlock || slides.length === 0) {
     return;
   }
