@@ -1,3 +1,5 @@
+import { animate } from "./helpers";
+
 const calc = (price = 100) => {
   const calcBlock = document.querySelector(".calc-block");
   const calcType = document.querySelector(".calc-type");
@@ -30,25 +32,35 @@ const calc = (price = 100) => {
       totalValue = 0;
     }
 
-    return totalValue;
+    animate({
+      duration: 500,
+      timing(timeFraction) {
+        return timeFraction;
+      },
+      draw(progress) {
+        total.textContent = Math.floor(progress * totalValue);
+      },
+    });
+
+    // return totalValue;
   };
 
-  const animateResult = (stop) => {
-    let start = 0;
-    let interval;
-    const animate = () => {
-      if (start < stop) {
-        start += stop * 0.1;
-        total.textContent = Math.floor(start);
-        interval = requestAnimationFrame(animate);
-      } else if (stop === 0) {
-        total.textContent = 0;
-      } else {
-        cancelAnimationFrame(interval);
-      }
-    };
-    animate();
-  };
+  // const animateResult = (stop) => {
+  //   let start = 0;
+  //   let interval;
+  //   const animate = () => {
+  //     if (start < stop) {
+  //       start += stop * 0.1;
+  //       total.textContent = Math.floor(start);
+  //       interval = requestAnimationFrame(animate);
+  //     } else if (stop === 0) {
+  //       total.textContent = 0;
+  //     } else {
+  //       cancelAnimationFrame(interval);
+  //     }
+  //   };
+  //   animate();
+  // };
 
   calcBlock.addEventListener("input", (e) => {
     if (
@@ -57,7 +69,7 @@ const calc = (price = 100) => {
       e.target === calcCount ||
       e.target === calcDay
     ) {
-      animateResult(countCalc());
+      countCalc();
     }
   });
 };
