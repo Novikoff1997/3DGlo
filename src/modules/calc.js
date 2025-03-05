@@ -30,8 +30,26 @@ const calc = (price = 100) => {
       totalValue = 0;
     }
 
-    total.textContent = totalValue;
+    return totalValue;
   };
+
+  const animateResult = (stop) => {
+    let start = 0;
+    let interval;
+    const animate = () => {
+      if (start < stop) {
+        start += stop * 0.1;
+        total.textContent = Math.floor(start);
+        interval = requestAnimationFrame(animate);
+      } else if (stop === 0) {
+        total.textContent = 0;
+      } else {
+        cancelAnimationFrame(interval);
+      }
+    };
+    animate();
+  };
+
   calcBlock.addEventListener("input", (e) => {
     if (
       e.target === calcType ||
@@ -39,7 +57,7 @@ const calc = (price = 100) => {
       e.target === calcCount ||
       e.target === calcDay
     ) {
-      countCalc();
+      animateResult(countCalc());
     }
   });
 };
