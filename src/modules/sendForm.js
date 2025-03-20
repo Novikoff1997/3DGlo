@@ -1,5 +1,3 @@
-import { animate } from "./helpers";
-
 const sendForm = ({ formsId, someElem = [] }) => {
   const statusBlock = document.createElement("div");
   const errorText = "Ошибка";
@@ -46,8 +44,6 @@ const sendForm = ({ formsId, someElem = [] }) => {
         formBody[elem.id] = element.value;
       }
     });
-
-    console.log("sybmit");
 
     if (validate(formInputs)) {
       sendData(formBody)
