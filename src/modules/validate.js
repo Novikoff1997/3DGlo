@@ -32,6 +32,7 @@ const validate = () => {
             });
             if (/[а-яА-Я\- ]/g.test(elem.value) || !elem.value === "") {
               isError = false;
+              elem.classList.add("success");
             } else {
               isError = true;
             }
@@ -40,6 +41,7 @@ const validate = () => {
             elem.value = elem.value.replace(/[^\w@\-_.!~*']/g, "");
             if (/[\w@\-_.!~*']/g.test(elem.value) || !elem.value === "") {
               isError = false;
+              elem.classList.add("success");
             } else {
               isError = true;
             }
@@ -48,6 +50,7 @@ const validate = () => {
             elem.value = elem.value.replace(/[^1-9\(\)\-\+ ]/g, "");
             if (/[1-9\(\)\-\+\ ]/g.test(elem.value) || !elem.value === "") {
               isError = false;
+              elem.classList.add("success");
             } else {
               isError = true;
             }
@@ -57,12 +60,7 @@ const validate = () => {
     });
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      if (!isError) {
-        alert("Данные отправлены!");
-        formInputs.forEach((elem) => {
-          elem.value = "";
-        });
-      } else {
+      if (isError) {
         alert("Проверьте правильность введенных данных");
       }
     });
@@ -71,6 +69,7 @@ const validate = () => {
   calc();
   formValidator("form1");
   formValidator("form2");
+  formValidator("form3");
 };
 
 export default validate;
