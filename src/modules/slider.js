@@ -24,7 +24,7 @@ const slider = (
       dotElement.classList.add("dot");
       portfolioDots.append(dotElement);
     }
-    getDots();
+    portfolioDots.firstChild.classList.add("dot-active");
   };
 
   const getDots = () => {
@@ -105,6 +105,7 @@ const slider = (
     true
   );
   setDots();
+  getDots();
   startSlide(timeInterval);
 };
 

@@ -28,7 +28,6 @@ const sendForm = ({ formsId, someElem = [] }) => {
     const formInputs = form.querySelectorAll("input");
     const formData = new FormData(form);
     const formBody = {};
-    statusBlock.innerHTML = '<img src="./images/preload.gif" alt="" style="width: 30px;" />';
     form.append(statusBlock);
 
     formData.forEach((val, key) => {
@@ -46,9 +45,15 @@ const sendForm = ({ formsId, someElem = [] }) => {
     });
 
     if (validate(formInputs)) {
+      // Прелоадер
+      statusBlock.innerHTML = '<img src="./images/preload.gif" alt="" style="width: 30px;" />';
       sendData(formBody)
         .then((data) => {
+          statusBlock.style.color = "#fff";
           statusBlock.textContent = successText;
+          setTimeout(() => {
+            statusBlock.textContent = "";
+          }, 3000);
           formInputs.forEach((input) => {
             input.value = "";
             input.classList.remove("success");
